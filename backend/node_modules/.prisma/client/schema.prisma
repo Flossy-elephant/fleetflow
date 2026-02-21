@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("DISPATCHER")
+  createdAt DateTime @default(now())
+}
+
+model Vehicle {
+  id              Int      @id @default(autoincrement())
+  name            String
+  licensePlate    String   @unique
+  make            String
+  model           String
+  type            String   @default("VAN")
+  maxCapacity     Float
+  odometer        Float    @default(0)
+  acquisitionCost Float    @default(0)
+  status          String   @default("AVAILABLE")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  trips       Trip[]
+  maintenance MaintenanceLog[]
+  fuelLogs    FuelLog[]
+}
+
+model Driver {
+  id             Int      @id @default(autoincrement())
+  name           String
+  licenseNumber  String   @unique
+  licenseExpiry  DateTime
+  phone          String?
+  status         String   @default("ON_DUTY")
+  safetyScore    Float    @default(100)
+  totalTrips     Int      @default(0)
+  completedTrips Int      @default(0)
+  onTimeTrips    Int      @default(0)
+  violations     Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  trips Trip[]
+}
+
+model Trip {
+  id            Int       @id @default(autoincrement())
+  vehicleId     Int
+  driverId      Int
+  cargoWeight   Float
+  distanceKm    Float     @default(0)
+  revenue       Float     @default(0)
+  status        String    @default("DRAFT")
+  origin        String
+  destination   String
+  estimatedFuel Float?
+  startOdometer Float?
+  endOdometer   Float?
+  scheduledAt   DateTime?
+  completedAt   DateTime?
+  notes         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+  driver  Driver  @relation(fields: [driverId], references: [id])
+}
+
+model MaintenanceLog {
+  id          Int       @id @default(autoincrement())
+  vehicleId   Int
+  description String
+  cost        Float
+  date        DateTime  @default(now())
+  status      String    @default("OPEN")
+  closedAt    DateTime?
+  createdAt   DateTime  @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+}
+
+model FuelLog {
+  id        Int      @id @default(autoincrement())
+  vehicleId Int
+  liters    Float
+  cost      Float
+  pricePerL Float?
+  date      DateTime @default(now())
+  odometer  Float?
+  createdAt DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+}
