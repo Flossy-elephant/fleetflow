@@ -4,40 +4,46 @@
 
 ---
 
-## ⚡ Quick Start (5 Minutes)
+## 🚀 Setup & Installation
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL 14+
+- Git
 
-### 1. Database
+### 1. Clone the repository
 ```bash
-psql -U postgres -c "CREATE DATABASE fleetflow;"
+git clone https://github.com/Flossy-elephant/fleetflow.git
+cd fleetflow
 ```
 
-### 2. Backend
+### 2. Backend Setup
 ```bash
 cd backend
-cp .env.example .env          # Edit DATABASE_URL if needed
+copy .env.example .env
 npm install
 npx prisma generate
 npx prisma db push
-node prisma/seed.js           # Seeds demo data
-npm run dev                   # Runs on http://localhost:3001
+node prisma/seed.js
+npm run dev
 ```
+Backend runs on → http://localhost:3001
 
-### 3. Frontend
+### 3. Frontend Setup
+Open a new terminal:
 ```bash
 cd frontend
 npm install
-npm run dev                   # Opens on http://localhost:5173
+npm run dev
 ```
+Frontend runs on → http://localhost:5173
 
-### 4. Login
+### 4. Login Credentials
 | Role | Email | Password |
 |------|-------|----------|
 | Manager | manager@fleetflow.com | password123 |
 | Dispatcher | dispatcher@fleetflow.com | password123 |
+
+> **Note:** No database installation required. SQLite is used — the database file is auto-created on first run.
 
 ---
 
