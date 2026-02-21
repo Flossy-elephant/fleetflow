@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FleetFlow — Fleet Intelligence System</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400,500&display=swap" rel="stylesheet" />
+  </head>
+  <body class="p-6">
+    <h1 class="text-3xl font-bold mb-6">FleetFlow Dashboard</h1>
+
+    <!-- Vehicles Section -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Vehicles</h2>
+      <div id="vehiclesList" class="space-y-2"></div>
+    </section>
+
+    <!-- Drivers Ranking Section -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Drivers Ranking</h2>
+      <div id="driversRanking" class="space-y-2"></div>
+    </section>
+
+    <!-- Trips Section -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Trips</h2>
+      <div id="tripsList" class="space-y-2"></div>
+    </section>
+
+    <!-- Fleet Analytics -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Fleet Summary</h2>
+      <pre id="fleetSummary" class="bg-gray-900 p-4 rounded-md"></pre>
+    </section>
+
+    <!-- Smart Dispatch -->
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Smart Dispatch Recommendation</h2>
+      <div class="flex gap-2 mb-2">
+        <input type="number" id="cargoWeight" placeholder="Cargo weight (kg)" class="p-2 rounded bg-gray-800 text-white" />
+        <input type="number" id="distanceKm" placeholder="Distance (km)" class="p-2 rounded bg-gray-800 text-white" />
+        <button id="getRecommendation" class="px-4 py-2 bg-blue-600 rounded text-white">Get Recommendation</button>
+      </div>
+      <pre id="dispatchResult" class="bg-gray-900 p-4 rounded-md"></pre>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
